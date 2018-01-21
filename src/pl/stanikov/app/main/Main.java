@@ -10,11 +10,23 @@ import javafx.scene.Scene;
 
 
 public class Main extends Application {
+	private int licznik;
+
+	public int getLicznik() {
+		return licznik;
+	}
+
+	public void setLicznik(int licznik) {
+		this.licznik = licznik;
+	}
+
 	ArrayList<Cat> cats = new ArrayList<>();
 	ArrayList<Dog> dogs = new ArrayList<>();
 	
 	@Override
 	public void start(Stage primaryStage) {
+		setLicznik(1);
+
 		try {
 			Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/pl/stanikov/app/view/MainPane.fxml"));
 			Scene scene = new Scene(parent);
@@ -41,4 +53,14 @@ public class Main extends Application {
         }
 	}
 	
+	public void addDog(Dog dog) {
+		dogs.add(dog);
+		System.out.println("Dodano psa");
+	}
+	
+	public void getDogs() {
+		for (Dog num : dogs) {
+            System.out.println(num);
+        }
+	}
 }

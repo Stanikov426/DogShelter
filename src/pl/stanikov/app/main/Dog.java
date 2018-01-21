@@ -9,5 +9,10 @@ public class Dog extends Pet{
 	public void makeNoise() {
 		System.out.println("Wof Wof!!!");
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getId() + " " + getPetName()+ " " + getPetRasa();
+	}
 
 }
