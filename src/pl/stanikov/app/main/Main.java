@@ -3,64 +3,95 @@ package pl.stanikov.app.main;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-public class Main extends Application {
-	private int licznik;
+public class Main extends Application {	
 
-	public int getLicznik() {
-		return licznik;
-	}
-
-	public void setLicznik(int licznik) {
-		this.licznik = licznik;
-	}
-
-	ArrayList<Cat> cats = new ArrayList<>();
-	ArrayList<Dog> dogs = new ArrayList<>();
+	static ArrayList<Cat> cats = new ArrayList<>();
+	static ArrayList<Dog> dogs = new ArrayList<>();
 	
+	static Cat pomCat;
+	static Dog pomDog;
+	
+	static Boolean pom;
+	public static Boolean getPom() {
+		return pom;
+	}
+
+	public static void setPom(Boolean pom) {
+		Main.pom = pom;
+	}
+
+	public static Dog getPomDog() {
+		return pomDog;
+	}
+
+	public static void setPomDog(Dog pomDog) {
+		Main.pomDog = pomDog;
+	}
+
+	public static Cat getPomCat() {
+		return pomCat;
+	}
+
+	public static void setPomCat(Cat pomCat) {
+		Main.pomCat = pomCat;
+	}
+	static private int Counter = 0;
+	
+	public static int getCounter() {
+		return Counter;
+	}
+
+	public static void setCounter(int counter) {
+		Counter = counter;
+	}
+
+	public static void setCats(ArrayList<Cat> cats) {
+		Main.cats = cats;
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
-		setLicznik(1);
-
 		try {
 			Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/pl/stanikov/app/view/MainPane.fxml"));
 			Scene scene = new Scene(parent);
 			primaryStage.setTitle("Schronisko");
 			primaryStage.setScene(scene);
-			primaryStage.show();
+			primaryStage.show();			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		primaryStage.setOnCloseRequest(e -> Platform.exit());
 	}
 	
 	public static void main(String[] args) {
 		launch(args);//Zakonczenie aplikacji
 	}
 	
-	public void addCat(Cat cat) {
+	public static void addCat(String name, String rasa, int id) {
+		Cat cat = new Cat(name, rasa, id);
 		cats.add(cat);
 		System.out.println("Dodano kotka");
+		System.out.println(cat.getId());
 	}
 	
-	public void getCats() {
-		for (Cat num : cats) {
-            System.out.println(num);
-        }
-	}
-	
-	public void addDog(Dog dog) {
+	public static void addDog(String name, String rasa, int id) {
+		Dog dog = new Dog(name, rasa, id);
 		dogs.add(dog);
 		System.out.println("Dodano psa");
+		System.out.println(dog.getId());
 	}
 	
-	public void getDogs() {
-		for (Dog num : dogs) {
-            System.out.println(num);
-        }
+	public static ArrayList<Dog> getDogs() {
+		return dogs;
+	}
+	public static ArrayList<Cat> getCats() {
+		return cats;
 	}
 }

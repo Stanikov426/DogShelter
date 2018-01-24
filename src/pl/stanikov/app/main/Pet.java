@@ -1,9 +1,12 @@
 package pl.stanikov.app.main;
 
-public class Pet extends Main{
+
+
+public class Pet{
 	private String petName;
 	private String petRasa;
 	private int id;
+	
 	public String getPetName() {
 		return petName;
 	}
@@ -22,9 +25,14 @@ public class Pet extends Main{
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getPetId() {
+		String strI = Integer.toString(getId());
+		return strI;
+	}
 	public Pet(String name, String rasa, int id) {
 		setPetName(name);
 		setPetRasa(rasa);
 		setId(id);
 	}
+	public Pet() {}
 }

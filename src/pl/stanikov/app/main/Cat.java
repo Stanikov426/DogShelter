@@ -1,9 +1,17 @@
 package pl.stanikov.app.main;
 
-public class Cat extends Pet{
+import java.io.Serializable;
+
+
+
+public class Cat extends Pet implements Serializable{
+	private static final long serialVersionUID = 3812017177088226528L;
 	
 	public Cat(String name, String rasa, int id) {
 		super(name, rasa, id);
+	}
+	public Cat() {
+		
 	}
 	
 	public void makeNoise() {

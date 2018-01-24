@@ -17,14 +17,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import pl.stanikov.app.main.Cat;
-import pl.stanikov.app.main.Dog;
+import pl.stanikov.app.main.Main;
+
 
 public class addController implements Initializable{
 	private Stage stage;
-	Cat kotek;
-	Dog piesek;
-	private int counter=0;
+	private int counter;
 	
     public int getCounter() {
 		return counter;
@@ -68,26 +66,25 @@ public class addController implements Initializable{
     		alert.showAndWait();
     	}
     	else if(choice.getValue()=="Kot") {
-    		kotek = new Cat(petName.getText(), petRasa.getText(), getCounter());
-    		setCounter(getCounter()+1);
+    		Main.addCat(petName.getText(), petRasa.getText(), getCounter());
+    		Main.setCounter(Main.getCounter()+1);
+    		setCounter(Main.getCounter());
     		setIdText();
-        	kotek.addCat(kotek);
     	}
     	else if(choice.getValue()=="Pies") {
-    		piesek = new Dog(petName.getText(), petRasa.getText(), getCounter());
-    		setCounter(getCounter()+1);
+    		Main.addDog(petName.getText(), petRasa.getText(), getCounter());
+    		Main.setCounter(Main.getCounter()+1);
+    		setCounter(Main.getCounter());
     		setIdText();
-    		piesek.addDog(piesek);
     	}
     }
     
     @FXML
     void back(ActionEvent event) throws IOException {
-    	stage = (Stage) addButton.getScene().getWindow();
+    	stage = (Stage) backButton.getScene().getWindow();
         Parent root;
         root = (Parent) FXMLLoader.load(getClass().getResource("/pl/stanikov/app/view/MainPane.fxml"));
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         stage.setScene(scene);
 		stage.show();
         System.out.println("opened");
@@ -95,7 +92,7 @@ public class addController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//setCounter(1);
+		setCounter(Main.getCounter());
 		setIdText();
 
 		choice.getItems().addAll("Pies", "Kot");
