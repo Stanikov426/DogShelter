@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -32,6 +33,7 @@ public class addController implements Initializable{
 	private Stage stage;
 	private int counter;
 	Image image = null;
+	LocalDate time;
 	
     public int getCounter() {
 		return counter;
@@ -80,14 +82,24 @@ public class addController implements Initializable{
 
     		alert.showAndWait();
     	}
+    	if(Main.getCounter()==20) {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Ups...");
+    		alert.setHeaderText(null);
+    		alert.setContentText("Brak miejsc :(");
+
+    		alert.showAndWait();
+    	}
     	else if(choice.getValue()=="Kot") {
-    		Main.addCat(petName.getText(), petRasa.getText(), getCounter(), image);    		
+    		time = LocalDate.now();
+    		Main.addCat(petName.getText(), petRasa.getText(), getCounter(), image, time);    		
     		Main.setCounter(Main.getCounter()+1);
     		setCounter(Main.getCounter());
     		setIdText();
     	}
     	else if(choice.getValue()=="Pies") {
-    		Main.addDog(petName.getText(), petRasa.getText(), getCounter(), image);  		
+    		time = LocalDate.now();
+    		Main.addDog(petName.getText(), petRasa.getText(), getCounter(), image, time);  		
     		Main.setCounter(Main.getCounter()+1);
     		setCounter(Main.getCounter());
     		setIdText();

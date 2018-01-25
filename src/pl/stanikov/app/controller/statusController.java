@@ -41,6 +41,9 @@ public class statusController implements Initializable {
 
     @FXML
     private TableColumn<Dog, String> dogId;
+    
+    @FXML
+    private TableColumn<Dog, String> dogTime;
 
     @FXML
     private TableView<Cat> catTable;
@@ -53,9 +56,15 @@ public class statusController implements Initializable {
 
     @FXML
     private TableColumn<Cat, String> catId;
+    
+    @FXML
+    private TableColumn<Cat, String> catTime;
 
     @FXML
     private Button backButton;
+    
+    @FXML
+    private Label space;
     
     @FXML
     void backClick(ActionEvent event) throws IOException {
@@ -74,10 +83,13 @@ public class statusController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		space.setText("Ilosc zwierzat: " + Main.getCounter() + "/20");
+		
 		//Dogs Table
 		dogName.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetName()));
 		dogRasa.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetRasa()));
 		dogId.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetId()));
+		dogTime.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetTime()));
 		
 		dogTable.setItems(getDogList());
 		
@@ -108,6 +120,7 @@ public class statusController implements Initializable {
 		catName.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetName()));
 		catRasa.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetRasa()));
 		catId.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetId()));
+		catTime.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetTime()));
 		
 		catTable.setItems(getCatList());
 		

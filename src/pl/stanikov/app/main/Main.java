@@ -1,5 +1,6 @@
 package pl.stanikov.app.main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -20,6 +21,7 @@ public class Main extends Application {
 	static Dog pomDog;
 	
 	static Boolean pom;
+	static private int Counter = 0;
 	public static Boolean getPom() {
 		return pom;
 	}
@@ -43,7 +45,6 @@ public class Main extends Application {
 	public static void setPomCat(Cat pomCat) {
 		Main.pomCat = pomCat;
 	}
-	static private int Counter = 0;
 	
 	public static int getCounter() {
 		return Counter;
@@ -75,15 +76,15 @@ public class Main extends Application {
 		launch(args);//Zakonczenie aplikacji
 	}
 	
-	public static void addCat(String name, String rasa, int id, Image image) {
-		Cat cat = new Cat(name, rasa, id, image);
+	public static void addCat(String name, String rasa, int id, Image image, LocalDate time) {
+		Cat cat = new Cat(name, rasa, id, image, time);
 		cats.add(cat);
 		System.out.println("Dodano kotka");
 		System.out.println(cat.getId());
 	}
 	
-	public static void addDog(String name, String rasa, int id, Image image) {
-		Dog dog = new Dog(name, rasa, id, image);
+	public static void addDog(String name, String rasa, int id, Image image, LocalDate time) {
+		Dog dog = new Dog(name, rasa, id, image, time);
 		dogs.add(dog);
 		System.out.println("Dodano psa");
 		System.out.println(dog.getId());

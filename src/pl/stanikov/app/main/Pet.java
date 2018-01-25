@@ -1,13 +1,26 @@
 package pl.stanikov.app.main;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javafx.scene.image.Image;
 
 public class Pet{
 	private String petName;
 	private String petRasa;
 	private Image petImage;
+	private LocalDate petDate;
 	private int id;
 	
+	public String getPetTime() {
+		DateTimeFormatter formatter_2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String format = petDate.format(formatter_2);
+		System.out.println(format);
+		return format;
+	}
+	public void setPetTime(LocalDate petTime) {
+		this.petDate = petTime;
+	}
 	
 	public Image getPetImage() {
 		return petImage;
@@ -37,11 +50,12 @@ public class Pet{
 		String strI = Integer.toString(getId());
 		return strI;
 	}
-	public Pet(String name, String rasa, int id, Image image) {
+	public Pet(String name, String rasa, int id, Image image, LocalDate time) {
 		setPetName(name);
 		setPetRasa(rasa);
 		setId(id);		
 		setPetImage(image);
+		setPetTime(time);
 	}
 	public Pet() {}
 }

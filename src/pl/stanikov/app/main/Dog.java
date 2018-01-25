@@ -1,11 +1,13 @@
 package pl.stanikov.app.main;
 
+import java.time.LocalDate;
+
 import javafx.scene.image.Image;
 
 public class Dog extends Pet{
 	
-	public Dog(String name, String rasa, int id, Image image) {
-		super(name, rasa, id, image);
+	public Dog(String name, String rasa, int id, Image image, LocalDate time) {
+		super(name, rasa, id, image, time);
 	}
 	
 	public void makeNoise() {
