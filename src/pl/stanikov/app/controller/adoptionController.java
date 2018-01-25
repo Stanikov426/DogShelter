@@ -33,11 +33,13 @@ public class adoptionController implements Initializable {
 			Dog test = Main.getPomDog();
 			nameLabel.setText(test.getPetName());
 			rasaLabel.setText(test.getPetRasa());
+			imageView.setImage(test.getPetImage());
 		}
 		else {
 			Cat test = Main.getPomCat();
 			nameLabel.setText(test.getPetName());
 			rasaLabel.setText(test.getPetRasa());
+			imageView.setImage(test.getPetImage());
 		}
 	}
 

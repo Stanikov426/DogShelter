@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 
 public class Main extends Application {	
@@ -74,15 +75,15 @@ public class Main extends Application {
 		launch(args);//Zakonczenie aplikacji
 	}
 	
-	public static void addCat(String name, String rasa, int id) {
-		Cat cat = new Cat(name, rasa, id);
+	public static void addCat(String name, String rasa, int id, Image image) {
+		Cat cat = new Cat(name, rasa, id, image);
 		cats.add(cat);
 		System.out.println("Dodano kotka");
 		System.out.println(cat.getId());
 	}
 	
-	public static void addDog(String name, String rasa, int id) {
-		Dog dog = new Dog(name, rasa, id);
+	public static void addDog(String name, String rasa, int id, Image image) {
+		Dog dog = new Dog(name, rasa, id, image);
 		dogs.add(dog);
 		System.out.println("Dodano psa");
 		System.out.println(dog.getId());
@@ -94,4 +95,5 @@ public class Main extends Application {
 	public static ArrayList<Cat> getCats() {
 		return cats;
 	}
+	
 }

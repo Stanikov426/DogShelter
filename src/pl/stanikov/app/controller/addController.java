@@ -1,9 +1,14 @@
 package pl.stanikov.app.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,17 +17,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import pl.stanikov.app.main.Main;
 
 
 public class addController implements Initializable{
 	private Stage stage;
 	private int counter;
+	Image image = null;
 	
     public int getCounter() {
 		return counter;
@@ -56,8 +65,14 @@ public class addController implements Initializable{
     private Button addButton;
     
     @FXML
+    private Button addFotoButton;
+
+    @FXML
+    private ImageView myimageView;
+    
+    @FXML
     void add(ActionEvent event) {
-    	if(petRasa.getText().equals("")||petName.getText().equals("")) {
+    	if(petRasa.getText().equals("")||petName.getText().equals("")||image==null) {
     		Alert alert = new Alert(AlertType.INFORMATION);
     		alert.setTitle("Ups...");
     		alert.setHeaderText(null);
@@ -66,13 +81,13 @@ public class addController implements Initializable{
     		alert.showAndWait();
     	}
     	else if(choice.getValue()=="Kot") {
-    		Main.addCat(petName.getText(), petRasa.getText(), getCounter());
+    		Main.addCat(petName.getText(), petRasa.getText(), getCounter(), image);    		
     		Main.setCounter(Main.getCounter()+1);
     		setCounter(Main.getCounter());
     		setIdText();
     	}
     	else if(choice.getValue()=="Pies") {
-    		Main.addDog(petName.getText(), petRasa.getText(), getCounter());
+    		Main.addDog(petName.getText(), petRasa.getText(), getCounter(), image);  		
     		Main.setCounter(Main.getCounter()+1);
     		setCounter(Main.getCounter());
     		setIdText();
@@ -90,6 +105,27 @@ public class addController implements Initializable{
         System.out.println("opened");
     }
 
+    @FXML
+    void addFoto(ActionEvent event) {
+    	FileChooser fileChooser = new FileChooser();
+        
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+          
+        //Show open file dialog
+        File file = fileChooser.showOpenDialog(null);
+                   
+        try {
+            BufferedImage bufferedImage = ImageIO.read(file);
+            image = SwingFXUtils.toFXImage(bufferedImage, null);
+            myimageView.setImage(image);
+        } catch (IOException ex) {
+           // Logger.getLogger(JavaFXPixel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setCounter(Main.getCounter());

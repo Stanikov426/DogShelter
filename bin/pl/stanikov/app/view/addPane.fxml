@@ -4,12 +4,13 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.stanikov.app.controller.addController">
    <children>
-      <Label layoutX="171.0" layoutY="45.0" text="Dodaj zwierzaka">
+      <Label layoutX="48.0" layoutY="45.0" text="Dodaj zwierzaka">
          <font>
             <Font size="36.0" />
          </font>
@@ -34,7 +35,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="choice" layoutX="147.0" layoutY="119.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choice" layoutX="147.0" layoutY="119.0" prefHeight="25.0" prefWidth="104.0" />
       <TextField fx:id="petName" layoutX="102.0" layoutY="154.0" />
       <TextField fx:id="petRasa" layoutX="102.0" layoutY="187.0" />
       <Label fx:id="id" layoutX="78.0" layoutY="217.0">
@@ -42,7 +43,14 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="63.0" layoutY="292.0" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="193.0" text="Wroc do menu" />
-      <Button fx:id="addButton" layoutX="332.0" layoutY="292.0" mnemonicParsing="false" onAction="#add" prefHeight="46.0" prefWidth="193.0" text="Dodaj zwierzaka" />
+      <Button fx:id="backButton" layoutX="64.0" layoutY="315.0" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="193.0" text="Wroc do menu" />
+      <Button fx:id="addButton" layoutX="333.0" layoutY="315.0" mnemonicParsing="false" onAction="#add" prefHeight="46.0" prefWidth="193.0" text="Dodaj zwierzaka" />
+      <Button fx:id="addFotoButton" layoutX="398.0" layoutY="235.0" mnemonicParsing="false" onAction="#addFoto" prefHeight="25.0" prefWidth="150.0" text="Dodaj zdjecie" />
+      <Label layoutX="292.0" layoutY="149.0" text="Zdjecie:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="myimageView" fitHeight="184.0" fitWidth="200.0" layoutX="373.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
