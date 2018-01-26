@@ -87,8 +87,9 @@ public class addController implements Initializable{
     		alert.setTitle("Ups...");
     		alert.setHeaderText(null);
     		alert.setContentText("Brak miejsc :(");
-
+    		
     		alert.showAndWait();
+    		
     	}
     	else if(choice.getValue()=="Kot") {
     		time = LocalDate.now();
@@ -144,6 +145,5 @@ public class addController implements Initializable{
 		setIdText();
 
 		choice.getItems().addAll("Pies", "Kot");
-	}
-
+	}	
 }
