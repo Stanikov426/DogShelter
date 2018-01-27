@@ -3,19 +3,18 @@ package pl.stanikov.app.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import pl.stanikov.app.main.Cat;
 import pl.stanikov.app.main.Dog;
 import pl.stanikov.app.main.Main;
 
 public class adoptionController implements Initializable {
-
-    @FXML
-    private Button adoptionButton;
+	private Stage stage;
 
     @FXML
     private Label nameLabel;
@@ -25,6 +24,23 @@ public class adoptionController implements Initializable {
 
     @FXML
     private ImageView imageView;
+    
+    @FXML
+    void Click(ActionEvent event) {
+    	stage = (Stage) nameLabel.getScene().getWindow();
+    	if(Main.getPom()==true) {
+			Dog test = Main.getPomDog();
+			Main.adoptionDog(test);
+			Main.setPomDog(null);
+			stage.close();
+		}
+		else {
+			Cat test = Main.getPomCat();
+			Main.adoptionCat(test);
+			Main.setPomCat(null);
+			stage.close();
+		}
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

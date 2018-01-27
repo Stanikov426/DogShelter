@@ -15,7 +15,6 @@ public class Pet{
 	public String getPetTime() {
 		DateTimeFormatter formatter_2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String format = petDate.format(formatter_2);
-		System.out.println(format);
 		return format;
 	}
 	public void setPetTime(LocalDate petTime) {

@@ -14,11 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import pl.stanikov.app.main.Cat;
 import pl.stanikov.app.main.Dog;
@@ -26,6 +28,7 @@ import pl.stanikov.app.main.Main;
 
 public class statusController implements Initializable {
 	private Stage stage;
+	private int pom=0;
 
 	@FXML
     private Label dataLabel;
@@ -75,15 +78,15 @@ public class statusController implements Initializable {
         stage.setScene(scene);
 		stage.show();
         System.out.println("opened");
+       
     }
-
+    
 	public void setCatTable(TableView<Cat> catTable) {
 		this.catTable = catTable;
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		space.setText("Ilosc zwierzat: " + Main.getCounter() + "/20");
 		
 		//Dogs Table
 		dogName.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getPetName()));
@@ -101,16 +104,20 @@ public class statusController implements Initializable {
                     Main.setPomDog(rowData);
                     Main.setPom(true);
                     System.out.println("Double click on: "+rowData.getPetName());
-                    
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/stanikov/app/view/adoptionPane.fxml"));
-                                Parent root1 = (Parent) fxmlLoader.load();
-                                Stage stage = new Stage();
-                                stage.setScene(new Scene(root1));  
-                                stage.show();
-                        } catch(Exception e) {
-                           e.printStackTrace();
-                          }
+                    if(Main.checkDog(rowData)==0) {
+                    	alert();
+                    }
+                    else {
+                    	try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/stanikov/app/view/adoptionPane.fxml"));
+                                    Parent root1 = (Parent) fxmlLoader.load();
+                                    Stage stage = new Stage();
+                                    stage.setScene(new Scene(root1));  
+                                    stage.show();
+                            } catch(Exception e) {
+                               e.printStackTrace();
+                              }
+                    }
                 }
             });
             return row ;
@@ -133,19 +140,25 @@ public class statusController implements Initializable {
                     Main.setPom(false);
                     System.out.println("Double click on: "+rowData.getPetName());
                     
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/stanikov/app/view/adoptionPane.fxml"));
-                                Parent root1 = (Parent) fxmlLoader.load();
-                                Stage stage = new Stage();
-                                stage.setScene(new Scene(root1));  
-                                stage.show();                             
-                        } catch(Exception e) {
-                           e.printStackTrace();
-                          }
+                    if(Main.checkCat(rowData)==0) {
+                    	alert();
+                    }
+                    else {
+                    	try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pl/stanikov/app/view/adoptionPane.fxml"));
+                                    Parent root1 = (Parent) fxmlLoader.load();
+                                    Stage stage = new Stage();
+                                    stage.setScene(new Scene(root1));  
+                                    stage.show();                             
+                            } catch(Exception e) {
+                               e.printStackTrace();
+                              }
+                    }
                 }
             });
             return row ;
         });
+		space.setText("Ilosc zwierzat: " + pom + "/20");
 	}
 	
 	 private ObservableList<Dog> getDogList() {
@@ -153,6 +166,7 @@ public class statusController implements Initializable {
 	      ArrayList<Dog> dogs = Main.getDogs();
 	      for (Dog num : dogs) {
 	            dogsList.add(num);
+	            pom= pom+1;
 	        }
 	      	 
 	      return dogsList;
@@ -162,8 +176,17 @@ public class statusController implements Initializable {
 	      ArrayList<Cat> cats = Main.getCats();
 	      for (Cat num : cats) {
 	            catsList.add(num);
+	            pom= pom+1;
 	        }
 	      	 
 	      return catsList;
 	  }
+	 private void alert() {
+		 Alert alert = new Alert(AlertType.INFORMATION);
+ 		alert.setTitle("Ups...");
+ 		alert.setHeaderText(null);
+ 		alert.setContentText("Zwierzak zosta³ juz adoptowany :)");
+
+ 		alert.showAndWait();
+	 }
 }

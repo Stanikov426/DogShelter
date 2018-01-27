@@ -28,6 +28,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import pl.stanikov.app.main.Main;
 
+import java.util.Properties;    
+import javax.mail.*;    
+import javax.mail.internet.*;    
 
 public class addController implements Initializable{
 	private Stage stage;
@@ -74,14 +77,6 @@ public class addController implements Initializable{
     
     @FXML
     void add(ActionEvent event) {
-    	if(petRasa.getText().equals("")||petName.getText().equals("")||image==null) {
-    		Alert alert = new Alert(AlertType.INFORMATION);
-    		alert.setTitle("Ups...");
-    		alert.setHeaderText(null);
-    		alert.setContentText("Uzupelnij dane :)");
-
-    		alert.showAndWait();
-    	}
     	if(Main.getCounter()==20) {
     		Alert alert = new Alert(AlertType.INFORMATION);
     		alert.setTitle("Ups...");
@@ -90,6 +85,15 @@ public class addController implements Initializable{
     		
     		alert.showAndWait();
     		
+    		send("dc.shelter0@gmail.com","123456ms","M.Staniszewski16@gmail.com","Schronisko","Próbowano dodaæ nowego zwierzaka ale nie ma ju¿ miejsc :/"); 
+    	}
+    	else if(petRasa.getText().equals("")||petName.getText().equals("")||image==null) {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Ups...");
+    		alert.setHeaderText(null);
+    		alert.setContentText("Uzupelnij dane :)");
+
+    		alert.showAndWait();
     	}
     	else if(choice.getValue()=="Kot") {
     		time = LocalDate.now();
@@ -146,4 +150,33 @@ public class addController implements Initializable{
 
 		choice.getItems().addAll("Pies", "Kot");
 	}	
+	
+	public void send(String from,String password,String to,String sub,String msg){  
+        //Get properties object    
+        Properties props = new Properties();    
+        props.put("mail.smtp.host", "smtp.gmail.com");    
+        props.put("mail.smtp.socketFactory.port", "465");    
+        props.put("mail.smtp.socketFactory.class",    
+                  "javax.net.ssl.SSLSocketFactory");    
+        props.put("mail.smtp.auth", "true");    
+        props.put("mail.smtp.port", "465");    
+        //get Session   
+        Session session = Session.getDefaultInstance(props,    
+         new javax.mail.Authenticator() {    
+         protected PasswordAuthentication getPasswordAuthentication() {    
+         return new PasswordAuthentication(from,password);  
+         }    
+        });    
+        //compose message    
+        try {    
+         MimeMessage message = new MimeMessage(session);    
+         message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
+         message.setSubject(sub);    
+         message.setText(msg);    
+         //send message  
+         Transport.send(message);    
+         System.out.println("Wyslano maila...");    
+        } catch (MessagingException e) {throw new RuntimeException(e);}    
+           
+  }  
 }

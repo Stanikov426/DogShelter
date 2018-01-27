@@ -80,14 +80,12 @@ public class Main extends Application {
 		Cat cat = new Cat(name, rasa, id, image, time);
 		cats.add(cat);
 		System.out.println("Dodano kotka");
-		System.out.println(cat.getId());
 	}
 	
 	public static void addDog(String name, String rasa, int id, Image image, LocalDate time) {
 		Dog dog = new Dog(name, rasa, id, image, time);
 		dogs.add(dog);
 		System.out.println("Dodano psa");
-		System.out.println(dog.getId());
 	}
 	
 	public static ArrayList<Dog> getDogs() {
@@ -96,5 +94,27 @@ public class Main extends Application {
 	public static ArrayList<Cat> getCats() {
 		return cats;
 	}
-	
+	public static void adoptionDog(Dog dog) {
+		dogs.remove(dog);
+		
+	}
+	public static void adoptionCat(Cat cat) {
+		cats.remove(cat);
+	}
+	public static int checkDog(Dog dog) {
+		for (Dog num : dogs) {
+            if(dog.equals(num)) {
+            	return 1;
+            }
+        }
+		return 0;
+	}
+	public static int checkCat(Cat cat) {
+		for (Cat num : cats) {
+            if(cat.equals(num)) {
+            	return 1;
+            }
+        }
+		return 0;
+	}
 }
