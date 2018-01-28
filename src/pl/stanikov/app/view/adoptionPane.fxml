@@ -8,13 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.stanikov.app.controller.adoptionController">
    <children>
-      <Button layoutX="27.0" layoutY="188.0" mnemonicParsing="false" onAction="#Click" text="Adoptuj" />
-      <Label fx:id="nameLabel" layoutX="14.0" layoutY="32.0" text="Label">
+      <Button layoutX="27.0" layoutY="188.0" mnemonicParsing="false" onAction="#Click" text="Adoption" />
+      <Label fx:id="nameLabel" layoutX="14.0" layoutY="32.0" text="name">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="rasaLabel" layoutX="14.0" layoutY="66.0" text="Label">
+      <Label fx:id="rasaLabel" layoutX="14.0" layoutY="66.0" text="rasa">
          <font>
             <Font size="18.0" />
          </font>

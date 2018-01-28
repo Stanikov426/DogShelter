@@ -7,10 +7,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.stanikov.app.controller.MainController">
    <children>
-      <Button fx:id="addButton" layoutX="250.0" layoutY="123.0" mnemonicParsing="false" onAction="#addClick" prefHeight="40.0" prefWidth="120.0" text="Dodaj" />
-      <Button fx:id="statusButton" layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#statusClick" prefHeight="40.0" prefWidth="120.0" text="Sprawdz Stan" />
-      <Button fx:id="aboutButton" layoutX="250.0" layoutY="282.0" mnemonicParsing="false" onAction="#aboutClick" prefHeight="40.0" prefWidth="120.0" text="Informacje" />
-      <Label layoutX="73.0" layoutY="25.0" text="Schronisko dla Psow i Kotow">
+      <Button fx:id="addButton" layoutX="250.0" layoutY="123.0" mnemonicParsing="false" onAction="#addClick" prefHeight="40.0" prefWidth="120.0" text="Add Pet" />
+      <Button fx:id="statusButton" layoutX="250.0" layoutY="200.0" mnemonicParsing="false" onAction="#statusClick" prefHeight="40.0" text="Status and Adoption" />
+      <Button fx:id="aboutButton" layoutX="250.0" layoutY="282.0" mnemonicParsing="false" onAction="#aboutClick" prefHeight="40.0" prefWidth="120.0" text="About" />
+      <Label layoutX="194.0" layoutY="41.0" text="Animal Shelter">
          <font>
             <Font size="36.0" />
          </font>

@@ -7,7 +7,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/janusz/Desktop/activation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/janusz/Desktop/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/janusz/eclipse-workspace/DogShelter/jar/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/janusz/eclipse-workspace/DogShelter/jar/mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -63,7 +63,7 @@ public class Main extends Application {
 		try {
 			Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/pl/stanikov/app/view/MainPane.fxml"));
 			Scene scene = new Scene(parent);
-			primaryStage.setTitle("Schronisko");
+			primaryStage.setTitle("Shelter");
 			primaryStage.setScene(scene);
 			primaryStage.show();			
 		} catch(Exception e) {
