@@ -114,11 +114,13 @@ public class statusController implements Initializable {
                                     Stage stage = new Stage();
                                     stage.setScene(new Scene(root1));  
                                     stage.show();
+                                    //System.out.println("TEST!!!!");
                             } catch(Exception e) {
                                e.printStackTrace();
                               }
                     }
                 }
+                refreshTable();
             });
             return row ;
         });
@@ -155,6 +157,7 @@ public class statusController implements Initializable {
                               }
                     }
                 }
+                refreshTable();
             });
             return row ;
         });
@@ -188,5 +191,11 @@ public class statusController implements Initializable {
  		alert.setContentText("Zwierzak zosta³ juz adoptowany :)");
 
  		alert.showAndWait();
+	 }
+	 public void refreshTable() {
+		 dogTable.getItems().clear();
+		 dogTable.setItems(getDogList());
+		 catTable.getItems().clear();
+		 catTable.setItems(getCatList());
 	 }
 }

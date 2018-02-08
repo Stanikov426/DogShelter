@@ -1,12 +1,19 @@
 package pl.stanikov.app.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import pl.stanikov.app.main.Cat;
@@ -39,6 +46,7 @@ public class adoptionController implements Initializable {
 			Main.adoptionCat(test);
 			Main.setPomCat(null);
 			stage.close();
+			
 		}
     }
 
@@ -49,14 +57,25 @@ public class adoptionController implements Initializable {
 			Dog test = Main.getPomDog();
 			nameLabel.setText(test.getPetName());
 			rasaLabel.setText(test.getPetRasa());
-			imageView.setImage(test.getPetImage());
+			imageView.setImage(pathToImage(test.getFile()));
 		}
 		else {
 			Cat test = Main.getPomCat();
 			nameLabel.setText(test.getPetName());
 			rasaLabel.setText(test.getPetRasa());
-			imageView.setImage(test.getPetImage());
+			imageView.setImage(pathToImage(test.getFile()));
 		}
+	}
+	private Image pathToImage(File file) {
+        
+        try {
+            BufferedImage bufferedImage = ImageIO.read(file);;
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            return image;
+        } catch (IOException ex) {
+            System.out.println("Zdjecie nie zostalo stworzone");
+            return null;
+        }
 	}
 
 }

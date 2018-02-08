@@ -1,8 +1,14 @@
 package pl.stanikov.app.main;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 public class Pet{
@@ -10,8 +16,32 @@ public class Pet{
 	private String petRasa;
 	private Image petImage;
 	private LocalDate petDate;
+	private String filePath;
+	private File file;
 	private int id;
 	
+	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+		File test = new File(getFilePath());
+		setFile(test);
+		try {
+            BufferedImage bufferedImage = ImageIO.read(test);;
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            setPetImage(image);
+        } catch (IOException ex) {
+            System.out.println("Zdjecie nie zostalo stworzone");
+        }
+	}
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
 	public String getPetTime() {
 		DateTimeFormatter formatter_2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String format = petDate.format(formatter_2);
@@ -21,6 +51,11 @@ public class Pet{
 		this.petDate = petTime;
 	}
 	
+	public void setPetDate(String petTime) {
+		DateTimeFormatter formatter_2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dt = LocalDate.parse(petTime, formatter_2);
+		this.petDate = dt;
+	}	
 	public Image getPetImage() {
 		return petImage;
 	}
@@ -49,12 +84,14 @@ public class Pet{
 		String strI = Integer.toString(getId());
 		return strI;
 	}
-	public Pet(String name, String rasa, int id, Image image, LocalDate time) {
+	public Pet(String name, String rasa, int id, Image image, LocalDate time, File file) {
 		setPetName(name);
 		setPetRasa(rasa);
 		setId(id);		
 		setPetImage(image);
 		setPetTime(time);
+		setFile(file);
+		setFilePath(file.getPath());
 	}
 	public Pet() {}
 }

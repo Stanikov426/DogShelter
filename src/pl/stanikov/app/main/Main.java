@@ -1,5 +1,6 @@
 package pl.stanikov.app.main;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ import javafx.scene.image.Image;
 
 
 public class Main extends Application {	
+	static final int MAX_ANIMALS = 20;
+	static AnimalDAO dao = new AnimalDAO();
 
 	static ArrayList<Cat> cats = new ArrayList<>();
 	static ArrayList<Dog> dogs = new ArrayList<>();
@@ -59,7 +62,20 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
+		
+		for(int i=0; i<MAX_ANIMALS; i++) {
+			Dog dog = dao.readDog(i);
+			Cat cat = dao.readCat(i);
+			if(dog!=null) {
+				dogs.add(dog);
+				setCounter(dog.getId()+1);
+			}
+			if(cat!=null) {
+				cats.add(cat);
+				setCounter(cat.getId()+1);
+			}
+		}
 		try {
 			Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/pl/stanikov/app/view/MainPane.fxml"));
 			Scene scene = new Scene(parent);
@@ -69,22 +85,28 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		primaryStage.setOnCloseRequest(e -> Platform.exit());
+				
 	}
 	
 	public static void main(String[] args) {
 		launch(args);//Zakonczenie aplikacji
 	}
 	
-	public static void addCat(String name, String rasa, int id, Image image, LocalDate time) {
-		Cat cat = new Cat(name, rasa, id, image, time);
+	public static void addCat(String name, String rasa, int id, Image image, LocalDate time, File file) {
+		Cat cat = new Cat(name, rasa, id, image, time, file);
 		cats.add(cat);
+		dao.createCat(cat);
+		setCounter(Main.getCounter()+1);
 		System.out.println("Dodano kotka");
 	}
 	
-	public static void addDog(String name, String rasa, int id, Image image, LocalDate time) {
-		Dog dog = new Dog(name, rasa, id, image, time);
+	public static void addDog(String name, String rasa, int id, Image image, LocalDate time, File file) {
+		Dog dog = new Dog(name, rasa, id, image, time, file);
 		dogs.add(dog);
+		dao.createDog(dog);
+		setCounter(Main.getCounter()+1);
 		System.out.println("Dodano psa");
 	}
 	
@@ -96,10 +118,11 @@ public class Main extends Application {
 	}
 	public static void adoptionDog(Dog dog) {
 		dogs.remove(dog);
-		
+		dao.deleteDog(dog);
 	}
 	public static void adoptionCat(Cat cat) {
 		cats.remove(cat);
+		dao.deleteCat(cat);
 	}
 	public static int checkDog(Dog dog) {
 		for (Dog num : dogs) {
@@ -117,4 +140,5 @@ public class Main extends Application {
         }
 		return 0;
 	}
+	
 }

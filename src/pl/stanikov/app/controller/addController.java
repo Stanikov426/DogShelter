@@ -36,6 +36,7 @@ public class addController implements Initializable{
 	private Stage stage;
 	private int counter;
 	Image image = null;
+	File file;
 	LocalDate time;
 	
     public int getCounter() {
@@ -97,15 +98,15 @@ public class addController implements Initializable{
     	}
     	else if(choice.getValue()=="Kot") {
     		time = LocalDate.now();
-    		Main.addCat(petName.getText(), petRasa.getText(), getCounter(), image, time);    		
-    		Main.setCounter(Main.getCounter()+1);
+    		Main.addCat(petName.getText(), petRasa.getText(), getCounter(), image, time, file);    		
+    		//Main.setCounter(Main.getCounter()+1);
     		setCounter(Main.getCounter());
     		setIdText();
     	}
     	else if(choice.getValue()=="Pies") {
     		time = LocalDate.now();
-    		Main.addDog(petName.getText(), petRasa.getText(), getCounter(), image, time);  		
-    		Main.setCounter(Main.getCounter()+1);
+    		Main.addDog(petName.getText(), petRasa.getText(), getCounter(), image, time, file);  		
+    		//Main.setCounter(Main.getCounter()+1);
     		setCounter(Main.getCounter());
     		setIdText();
     	}
@@ -132,14 +133,14 @@ public class addController implements Initializable{
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
           
         //Show open file dialog
-        File file = fileChooser.showOpenDialog(null);
+        file = fileChooser.showOpenDialog(null);
                    
         try {
             BufferedImage bufferedImage = ImageIO.read(file);
             image = SwingFXUtils.toFXImage(bufferedImage, null);
             myimageView.setImage(image);
         } catch (IOException ex) {
-           // Logger.getLogger(JavaFXPixel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Zdjecie nie zostalo stworzone");
         }
     }
     
