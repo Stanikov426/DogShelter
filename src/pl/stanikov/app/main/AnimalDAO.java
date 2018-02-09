@@ -13,7 +13,6 @@ public class AnimalDAO {
 	    private final static String CREATE = "INSERT INTO animal(id, animalType, animalName, animalRase, animalFoto, animalDate) VALUES(?, ?, ?, ?, ?, ?);";
 	    private final static String READDOG = "SELECT id, animalType, animalName, animalRase, animalFoto, animalDate FROM animal WHERE id = ? AND animalType = ?;";
 	    private final static String READCAT = "SELECT id, animalType, animalName, animalRase, animalFoto, animalDate FROM animal WHERE id = ? AND animalType = ?;";
-	    //private final static String UPDATE = "UPDATE book SET isbn=?, title=?, description=? WHERE isbn = ?;";
 	    private final static String DELETE = "DELETE FROM animal WHERE id=?;";
 	    
 	    public Dog readDog(int id) {
